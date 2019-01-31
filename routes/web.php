@@ -20,6 +20,10 @@ Route::post('/agendar', 'Front\HomeController@agendar');
 Route::post('/verificar-email', 'Front\HomeController@verificar_email');
 
 Route::get('/logout', 'Auth\LoginController@logout');
+
+Route::get('/enviar-confirmacao', 'Back\AgendamentoController@send_confirmation'); // enviar email confirmacao
+Route::get('/confirmar-agendamento/{token}', 'Back\AgendamentoController@confirm_token');
+
 Route::group(['prefix' => 'admin'], function(){
     
     Route::middleware(['guest'])->group(function(){
@@ -53,7 +57,7 @@ Route::group(['prefix' => 'admin'], function(){
         //LISTAGEM E DETALHE DOS AGENDAMENTOS
         Route::get('/agendamentos', 'Back\AgendamentoController@index');
         Route::get('/agendamentos/{id}', 'Back\AgendamentoController@show')->name('agendamento.show');
-        
+    
         
     });
 

@@ -32,22 +32,27 @@
 				</div>
 				<div class="m-portlet__body">
                     @if (count($errors) > 0)
-                        <div class="error">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
+                    <div class="error">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                     @endif
-                    <form enctype="multipart/form-data" action="{{route('servicos.update', ['id' => $servico->id])}}" method="POST">
-                        @csrf
+                    <form enctype="multipart/form-data" action="{{route('servicos.update', ['id' => $servico->id] )}}" method="POST">
                         @method('PATCH')
-                    
-                        {{-- <div class="form-group m-form__group">
-                            <lavel>Foto</lavel>
-                            <input class="form-control m-input" name="input_img" type="file" id="imageInput">
-                        </div> --}}
+                        @csrf
+
+                        <div class="form-group m-form__group">
+                            <label>Foto</label>
+                            {{-- <div class="row">
+                                <div class="col-md-6">
+                                    <img src="{{asset($servico->img)}}" style="max-width: 300px; max-height: 300px;" alt="">
+                                </div>
+                            </div> --}}
+                            <input type="file" class="form-control m-input" name="input_img" id="imagem">
+                        </div>
 
                         <div class="form-group m-form__group">
                             <label for="nome">Nome Serviço</label>
@@ -56,7 +61,7 @@
 
                         <div class="form-group m-form__group">
                             <label for="nome">Valor</label>
-                            <input type="text" class="form-control m-input" id="valor" name="valor" value="{{number_format($servico->valor, 2)}}">
+                            <input type="text" class="form-control m-input" name="valor" id="valor" value="{{number_format($servico->valor, 2, '.', '.')}}">
                         </div>
 
                         <div class="form-group m-form__group">

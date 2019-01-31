@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ServicoModel;
 use Illuminate\Support\Facades\Redirect;
+use Intervention\Image\ImageManager;
 
 class ServicoController extends Controller
 {
@@ -36,14 +37,21 @@ class ServicoController extends Controller
             'nome'          =>  'required|max:60|min:5',
             'valor'         =>  'required',
             'descricao'     =>  'required|max:150',
-            // 'input_img'     =>  'required|image|mimes:jpg,jpeg.png'
+            'input_img'     =>  'required|image|mimes:jpg,jpeg,png'
         ]);
         
+        if( $request->hasFile('input_img') ){
+            $image                  =   $request->file('input_img');
+            $imageName              =   time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath        =   public_path('/site/');
+            $image->move($destinationPath, $imageName);
+        }
 
         $data   =   array(
             'nome'          =>  $request->input('nome'),
             'valor'         =>  $request->input('valor'),
             'descricao'     =>  $request->input('descricao'),
+            'input_img'     =>  $destinationPath . $imageName
         );
         try {
             ServicoModel::newServico($data);
@@ -60,14 +68,22 @@ class ServicoController extends Controller
             'nome'          =>  'required|max:60|min:5',
             'valor'         =>  'required',
             'descricao'     =>  'required|max:150',
-            // 'input_img'     =>  'required|image|mimes:jpg,jpeg.png'
+            'input_img'     =>  'required|image|mimes:jpg,jpeg,png'
         ]);
-        
+
+        if( $request->hasFile('input_img') ){
+            $image                  =   $request->file('input_img');
+            $imageName              =   time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath        =   public_path('/site/');
+            $image->move($destinationPath, $imageName);
+        }
+     
 
         $data   =   array(
             'nome'          =>  $request->input('nome'),
             'valor'         =>  $request->input('valor'),
             'descricao'     =>  $request->input('descricao'),
+            'input_img'     =>  $destinationPath . $imageName
         );
         try {
             ServicoModel::updateServico($data, $id);

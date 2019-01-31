@@ -48,10 +48,10 @@
 				</div>
 				<div class="m-portlet__body">
                     <div class="form-group m-form__group">
-                        <lavel>Foto</lavel>
+                        <label>Foto</label>
                         <div class="row">
                             <div class="col-md-6">
-                                <img src="{{asset($servico->img)}}" alt="">
+                                <img src="{{asset($servico->img)}}" style="max-width: 300px; max-height: 300px;" alt="">
                             </div>
                         </div>
                     </div>

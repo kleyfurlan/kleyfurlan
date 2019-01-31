@@ -12,7 +12,9 @@ class ServicoModel extends Model
     }
 
     public static function getServico($id){
-        return DB::table('servicos')->first();
+        return DB::table('servicos')
+                ->where('id', '=', $id)
+                ->first();
     }
 
     public static function updateServico($data, $id){
@@ -22,6 +24,7 @@ class ServicoModel extends Model
                     'nome'      => $data['nome'],
                     'valor'     => $data['valor'],
                     'descricao' => $data['descricao'],
+                    'img'       => $data['input_img']
                 ]);
     }
 
@@ -31,7 +34,7 @@ class ServicoModel extends Model
                     'nome'      => $data['nome'],
                     'valor'     => $data['valor'],
                     'descricao' => $data['descricao'],
-                    'img'       => 'public/servico.jpg'
+                    'img'       => $data['input_img'] //'public/servico.jpg'
                 ]);
     }
 
